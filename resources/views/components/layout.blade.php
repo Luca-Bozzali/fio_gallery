@@ -3,20 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="description" content="Portfolio fotografico di Tommaso Fiorini">
+    <title>{{ $title ?? 'Fiorini Tommaso' }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body>
-    
-<x-navbar />
-    
-    <div>
-      {{$slot}}
-    </div>
+<body class="d-flex flex-column min-vh-100">
+    <x-navbar />
+
+    <main class="flex-grow-1">
+        {{ $slot }}
+    </main>
   
-<x-footer />
-
-
+    <x-footer />
 </body>
 </html>

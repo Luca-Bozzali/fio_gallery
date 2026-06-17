@@ -1,6 +1,6 @@
-
-  <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-    <p> © 2026 Fio-galley - All rights reserved. </p>
-    <a class="text-reset fw-bold text-center" href="">Designed & Developed by Luca Bozzali & Lorenzo Chiurazzi.</a>
+<footer class="site-footer">
+  <div class="container text-center">
+    <p>&copy; 2026 Fiorini Tommaso - All rights reserved.</p>
+    <a href="">Designed & Developed by Luca Bozzali & Lorenzo Chiurazzi.</a>
   </div>
 </footer>
