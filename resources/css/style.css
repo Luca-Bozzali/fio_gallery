@@ -22,30 +22,14 @@
     box-sizing: border-box;
 }
 
-html,
-body {
-    overflow-x: hidden;
-}
+
 
 body {
     min-height: 100vh;
     margin: 0;
-    background: var(--color-page);
-    color: var(--color-text);
+    background: var(--color-page);    
     font-family: var(--font-sans);
-    letter-spacing: 0;
-
 }
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-a:hover {
-    color: inherit;
-}
-
 
 /* NAVBAR */
 
@@ -116,7 +100,7 @@ a:hover {
 /* HOMEPAGE */
 
 
-.page-hero,
+
 .page-section {
     padding: clamp(4rem, 8vw, 7.5rem) 0;
 }
@@ -124,6 +108,7 @@ a:hover {
 .page-hero-home {
     display: flex;
     align-items: center;
+    padding: clamp(4rem, 8vw, 7.5rem) 0;
 }
 
 .hero-panel {
