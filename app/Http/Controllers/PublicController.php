@@ -14,6 +14,10 @@ class PublicController extends Controller
     return view('work');
     }
 
+    function personal() {
+    return view('personal');
+    }
+
     function about() {
     return view('about');
     }

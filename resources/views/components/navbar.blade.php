@@ -15,6 +15,10 @@
           <span>Work</span>
         </a>
 
+        <a class="nav-link {{ request()->routeIs('personal') ? 'active' : '' }}" href="{{ route('personal') }}">
+          <span>Personal</span>
+        </a>
+
         <a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">
           <span>About</span>
         </a>
