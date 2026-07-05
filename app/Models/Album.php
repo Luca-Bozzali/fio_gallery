@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Str;
+use App\Enums\AlbumType;
 
 class Album extends Model
 {
@@ -14,7 +15,6 @@ class Album extends Model
         'type',
         'slug',
         'description',
-        'cover_image',
         'featured',
         'is_published',
         'sort_order',
@@ -49,4 +49,14 @@ class Album extends Model
     {
         return $this->hasMany(Photo::class);
     }
+
+    protected function casts(): array
+{
+    return [
+        'featured' => 'boolean',
+        'is_published' => 'boolean',
+        'type' => AlbumType::class,
+    ];
 }
+}
+

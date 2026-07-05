@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Photo extends Model
 {
@@ -20,6 +21,21 @@ class Photo extends Model
         'sort_order',
         'is_published',
     ];
+
+    protected static function booted(): void
+    {
+        static::creating(function (Photo $photo) {
+            if ($photo->filepath && empty($photo->filename)) {
+                $photo->filename = basename($photo->filepath);
+            }
+        });
+        
+        static::deleting(function (Photo $photo) {
+    if ($photo->filepath) {
+        Storage::disk('public')->delete($photo->filepath);
+    }
+});
+    }
 
     public function album()
     {
