@@ -2,81 +2,84 @@
 
 namespace App\Filament\Resources\Albums\RelationManagers;
 
-use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Resources\Form;
-use Filament\Resources\Table;
+use Filament\Actions\CreateAction;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\EditAction;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
-use Filament\Tables;
+use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
 
 class PhotosRelationManager extends RelationManager
 {
     protected static string $relationship = 'photos';
 
-    // Opzionale: permette di identificare il record in alcune UI (es. titoli, global search)
-    protected static ?string $recordTitleAttribute = 'title';
-
-    /**
-     * Form di creazione/modifica per Photo.
-     */
-    public function form(Form $form): Form
+    public function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 FileUpload::make('filepath')
                     ->label('Foto')
                     ->image()
-                    ->imageEditor() // consente di editare/croppare l'immagine
+                    ->imageEditor()
                     ->disk('public')
-                    ->directory(fn() => 'albums/' . $this->getOwnerRecord()->id) 
+                    ->directory(fn (): string => 'albums/' . $this->getOwnerRecord()->id)
                     ->visibility('public')
                     ->required()
                     ->columnSpanFull(),
+
                 TextInput::make('title')
                     ->label('Titolo'),
+
                 Textarea::make('description')
                     ->label('Descrizione'),
+
                 TextInput::make('alt_text')
                     ->label('Testo alternativo'),
+
                 Toggle::make('is_published')
                     ->label('Pubblicata')
                     ->default(true),
             ]);
     }
 
-    /**
-     * Tabella relazione Photo.
-     */
     public function table(Table $table): Table
     {
         return $table
             ->recordTitleAttribute('title')
             ->columns([
-                Tables\Columns\ImageColumn::make('image_url')
+                ImageColumn::make('image_url')
                     ->label('')
                     ->disk('public')
                     ->square()
                     ->size(70),
-                Tables\Columns\TextColumn::make('title')
+
+                TextColumn::make('title')
                     ->label('Titolo')
                     ->searchable()
                     ->placeholder('Nessun titolo'),
-                Tables\Columns\TextColumn::make('alt_text')
+
+                TextColumn::make('alt_text')
                     ->label('Alt text')
                     ->placeholder('-'),
-                Tables\Columns\IconColumn::make('is_published')
+
+                IconColumn::make('is_published')
                     ->label('Pubblicata')
                     ->boolean(),
             ])
             ->defaultSort('sort_order')
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                CreateAction::make(),
             ])
             ->recordActions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                EditAction::make(),
+                DeleteAction::make(),
             ]);
     }
 }
