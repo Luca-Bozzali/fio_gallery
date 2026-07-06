@@ -5,13 +5,13 @@ namespace App\Enums;
 enum AlbumType: string
 {
     case Portfolio = 'portfolio';
-    case Services = 'services';
+    case Work = 'work';
 
     public function label(): string
     {
         return match ($this) {
             self::Portfolio => 'Portfolio',
-            self::Services => 'Servizi',
+            self::Work => 'Work',
         };
     }
 

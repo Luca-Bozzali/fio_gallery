@@ -25,10 +25,10 @@ class AlbumSeeder extends Seeder
 
             // Clienti
 
-            ['title' => 'Matrimonio Luca e Sara', 'year' => 2026, 'type' => 'client'],
-            ['title' => 'Villa Rossi', 'year' => 2026, 'type' => 'client'],
-            ['title' => 'Casa Bianchi', 'year' => 2025, 'type' => 'client'],
-            ['title' => 'Shooting Giulia', 'year' => 2025, 'type' => 'client'],
+            ['title' => 'Matrimonio Luca e Sara', 'year' => 2026, 'type' => 'work'],
+['title' => 'Villa Rossi', 'year' => 2026, 'type' => 'work'],
+['title' => 'Casa Bianchi', 'year' => 2025, 'type' => 'work'],
+['title' => 'Shooting Giulia', 'year' => 2025, 'type' => 'work'],
         ];
 
         foreach ($albums as $album) {
