@@ -17,10 +17,12 @@ class PhotoForm
                 FileUpload::make('filepath')
                     ->label('Foto')
                     ->image()
+                    ->imageEditor()
                     ->disk('public')
                     ->directory('albums')
                     ->visibility('public')
-                    ->required(),
+                    ->required()
+                    ->columnSpanFull(),
                 TextInput::make('title')
                     ->label('Titolo'),
 
