@@ -6,25 +6,53 @@
 
         <div class="editorial-grid">
 
-            <img src="{{ asset('images/prova_1.jpg') }}" class="photo">
+            <div class="grid-item tall">
+                <x-home-photo image="prova_1.jpg"/>
+            </div>
 
-            <img src="{{ asset('images/prova_2.jpg') }}" class="photo photo-tall">
+            <div class="grid-item">
+                <x-home-photo image="prova_2.jpg"/>
+            </div>
 
-            <img src="{{ asset('images/prova_3.jpg') }}" class="photo">
+            <div class="grid-item">
+                <x-home-photo image="prova_3.jpg"/>
+            </div>
 
-            <img src="{{ asset('images/prova_4.jpg') }}" class="photo">
+            <div class="grid-item tall">
+                <x-home-photo image="prova_4.jpg"/>
+            </div>
 
-            <img src="{{ asset('images/prova_5.jpg') }}" class="photo">
+            <div class="grid-item">
+                <x-home-photo image="prova_5.jpg"/>
+            </div>
 
-            <img src="{{ asset('images/prova_2.jpg') }}" class="photo photo-wide">
+            <div class="grid-item wide">
+                <x-home-photo image="prova_6.jpg"/>
+            </div>
 
-            <img src="{{ asset('images/prova_2.jpg') }}" class="photo">
+            <div class="grid-item wide">
+                <x-home-photo image="prova_7.jpg"/>
+            </div>
 
-            <img src="{{ asset('images/prova_3.jpg') }}" class="photo photo-tall">
+            <div class="grid-item">
+                <x-home-photo image="prova_8.jpg"/>
+            </div>
 
-            <img src="{{ asset('images/prova_4.jpg') }}" class="photo">
+            <div class="grid-item tall">
+                <x-home-photo image="prova_9.jpg"/>
+            </div>
 
-            <img src="{{ asset('images/prova_5.jpg') }}" class="photo">
+            <div class="grid-item">
+                <x-home-photo image="prova_10.jpg"/>
+            </div>
+
+            <div class="grid-item">
+                <x-home-photo image="prova_11.jpg"/>
+            </div>
+
+            <div class="grid-item">
+                <x-home-photo image="prova_12.jpg"/>
+            </div>
 
         </div>
 
@@ -32,5 +60,4 @@
 
 </section>
 
-       
 </x-layout>
