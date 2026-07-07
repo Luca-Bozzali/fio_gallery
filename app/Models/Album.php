@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use App\Enums\AlbumType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-use App\Enums\AlbumType;
 
 class Album extends Model
 {
@@ -14,6 +14,7 @@ class Album extends Model
         'type',
         'slug',
         'description',
+        'cover_image',
         'featured',
         'is_published',
         'sort_order',
@@ -25,19 +26,15 @@ class Album extends Model
     protected static function booted(): void
     {
         static::creating(function (Album $album) {
-
             if (empty($album->slug)) {
                 $album->slug = Str::slug($album->title);
             }
-
         });
 
         static::updating(function (Album $album) {
-
             if ($album->isDirty('title')) {
                 $album->slug = Str::slug($album->title);
             }
-
         });
     }
 
@@ -50,12 +47,11 @@ class Album extends Model
     }
 
     protected function casts(): array
-{
-    return [
-        'featured' => 'boolean',
-        'is_published' => 'boolean',
-        'type' => AlbumType::class,
-    ];
+    {
+        return [
+            'featured' => 'boolean',
+            'is_published' => 'boolean',
+            'type' => AlbumType::class,
+        ];
+    }
 }
-}
-

@@ -2,13 +2,12 @@
 
 namespace App\Filament\Resources\Albums\RelationManagers;
 
+use App\Filament\Resources\Photos\Schemas\PhotoForm;
+use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\IconColumn;
@@ -22,31 +21,10 @@ class PhotosRelationManager extends RelationManager
 
     public function form(Schema $schema): Schema
     {
-        return $schema
-            ->components([
-                FileUpload::make('filepath')
-                    ->label('Foto')
-                    ->image()
-                    ->imageEditor()
-                    ->disk('public')
-                    ->directory(fn (): string => 'albums/' . $this->getOwnerRecord()->id)
-                    ->visibility('public')
-                    ->required()
-                    ->columnSpanFull(),
-
-                TextInput::make('title')
-                    ->label('Titolo'),
-
-                Textarea::make('description')
-                    ->label('Descrizione'),
-
-                TextInput::make('alt_text')
-                    ->label('Testo alternativo'),
-
-                Toggle::make('is_published')
-                    ->label('Pubblicata')
-                    ->default(true),
-            ]);
+        return PhotoForm::configure(
+            $schema,
+            fn (): string => 'albums/'.$this->getOwnerRecord()->getKey(),
+        );
     }
 
     public function table(Table $table): Table
@@ -54,7 +32,7 @@ class PhotosRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('title')
             ->columns([
-                ImageColumn::make('image_url')
+                ImageColumn::make('filepath')
                     ->label('')
                     ->disk('public')
                     ->square()
@@ -74,12 +52,18 @@ class PhotosRelationManager extends RelationManager
                     ->boolean(),
             ])
             ->defaultSort('sort_order')
+            ->reorderable('sort_order')
             ->headerActions([
                 CreateAction::make(),
             ])
             ->recordActions([
                 EditAction::make(),
                 DeleteAction::make(),
+            ])
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
+                ]),
             ]);
     }
 }

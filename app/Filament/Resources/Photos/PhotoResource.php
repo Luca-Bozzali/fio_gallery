@@ -2,14 +2,12 @@
 
 namespace App\Filament\Resources\Photos;
 
-
 use App\Filament\Resources\Photos\Schemas\PhotoForm;
 use App\Models\Photo;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
-use Filament\Tables\Table;
 
 class PhotoResource extends Resource
 {
@@ -24,7 +22,6 @@ class PhotoResource extends Resource
         return PhotoForm::configure($schema);
     }
 
-
     public static function getRelations(): array
     {
         return [
@@ -32,6 +29,5 @@ class PhotoResource extends Resource
         ];
     }
 
-
-protected static bool $shouldRegisterNavigation = false;
+    protected static bool $shouldRegisterNavigation = false;
 }

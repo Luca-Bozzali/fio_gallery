@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\AlbumType;
 use App\Models\Album;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -15,35 +16,22 @@ class AlbumFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    public function definition(): array
+    {
+        $title = fake()->unique()->words(
+            fake()->numberBetween(2, 4),
+            true
+        );
 
-    
-public function definition(): array
-{
-    $title = fake()->unique()->words(
-        fake()->numberBetween(2, 4),
-        true
-    );
-
-    return [
-        'title' => ucwords($title),
-
-        'year' => fake()->numberBetween(2022, now()->year),
-
-        'type' => fake()->randomElement([
-            'portfolio',
-            'client',
-        ]),
-
-
-        'description' => fake()->paragraph(),
-
-        'cover_image' => null,
-
-        'featured' => false,
-
-        'is_published' => true,
-
-        'sort_order' => 0,
-    ];
-}
+        return [
+            'title' => ucwords($title),
+            'year' => fake()->numberBetween(2022, now()->year),
+            'type' => fake()->randomElement(AlbumType::cases())->value,
+            'description' => fake()->paragraph(),
+            'cover_image' => null,
+            'featured' => false,
+            'is_published' => true,
+            'sort_order' => 0,
+        ];
+    }
 }
