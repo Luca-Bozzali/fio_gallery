@@ -38,12 +38,12 @@ class AlbumResource extends Resource
         return AlbumsTable::configure($table);
     }
 
-   public static function getRelations(): array
-{
-    return [
-        RelationManagers\PhotosRelationManager::class,
-    ];
-}
+    public static function getRelations(): array
+    {
+        return [
+            RelationManagers\PhotosRelationManager::class,
+        ];
+    }
 
     public static function getPages(): array
     {

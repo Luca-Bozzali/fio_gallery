@@ -2,15 +2,16 @@
 
 namespace App\Filament\Resources\Photos\Schemas;
 
+use Closure;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
 
 class PhotoForm
 {
-    public static function configure(Schema $schema): Schema
+    public static function configure(Schema $schema, string|Closure|null $directory = 'albums'): Schema
     {
         return $schema
             ->components([
@@ -19,7 +20,7 @@ class PhotoForm
                     ->image()
                     ->imageEditor()
                     ->disk('public')
-                    ->directory('albums')
+                    ->directory($directory)
                     ->visibility('public')
                     ->required()
                     ->columnSpanFull(),
