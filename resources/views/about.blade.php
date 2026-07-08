@@ -1,5 +1,21 @@
 <x-layout title="About">
-    <section class="page-section">
+
+<section class="about-page">
+
+    <div class="content-wrapper">
+
+        <div class="about-grid">
+
+            <aside class="about-image">
+
+                <img
+                    src="{{ asset('images/prova_2.jpg') }}"
+                    alt="Tommaso Fiorini"
+                >
+
+            </aside>
+
+   <section class="page-section">
         <div class="container">
             <div class="content-narrow">
                 <h2 class="eyebrow">Biography</h2>
@@ -12,4 +28,11 @@
             </div>
         </div>
     </section>
+
+        </div>
+
+    </div>
+
+</section>
+
 </x-layout>
