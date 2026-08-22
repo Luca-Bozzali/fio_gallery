@@ -10,10 +10,16 @@ class ListAlbums extends ListRecords
 {
     protected static string $resource = AlbumResource::class;
 
+    public function getBreadcrumbs(): array
+    {
+        return [];
+    }
+
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            CreateAction::make()
+                ->label('Crea album'),
         ];
     }
 }

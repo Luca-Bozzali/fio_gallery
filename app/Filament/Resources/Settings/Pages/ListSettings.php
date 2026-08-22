@@ -13,4 +13,14 @@ class ListSettings extends ListRecords
     {
         return [];
     }
+
+    public function getBreadcrumbs(): array
+    {
+        return [];
+    }
+
+    public function getTitle(): string
+    {
+        return 'Informazioni personali';
+    }
 }

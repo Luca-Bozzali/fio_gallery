@@ -14,14 +14,14 @@ class AlbumSeeder extends Seeder
     {
         $albums = [
 
-            // Portfolio
+           // Personal
 
-            ['title' => 'Islanda', 'year' => 2026, 'type' => 'portfolio'],
-            ['title' => 'Dolomiti', 'year' => 2026, 'type' => 'portfolio'],
-            ['title' => 'Maspalomas', 'year' => 2025, 'type' => 'portfolio'],
-            ['title' => 'Street Photography', 'year' => 2025, 'type' => 'portfolio'],
-            ['title' => 'Tenerife', 'year' => 2024, 'type' => 'portfolio'],
-            ['title' => 'Madrid', 'year' => 2024, 'type' => 'portfolio'],
+['title' => 'Islanda', 'year' => 2026, 'type' => 'personal'],
+['title' => 'Dolomiti', 'year' => 2026, 'type' => 'personal'],
+['title' => 'Maspalomas', 'year' => 2025, 'type' => 'personal'],
+['title' => 'Street Photography', 'year' => 2025, 'type' => 'personal'],
+['title' => 'Tenerife', 'year' => 2024, 'type' => 'personal'],
+['title' => 'Madrid', 'year' => 2024, 'type' => 'personal'],
 
             // Work
 

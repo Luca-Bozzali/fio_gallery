@@ -4,13 +4,13 @@ namespace App\Enums;
 
 enum AlbumType: string
 {
-    case Portfolio = 'portfolio';
+    case Personal = 'personal';
     case Work = 'work';
 
     public function label(): string
     {
         return match ($this) {
-            self::Portfolio => 'Portfolio',
+            self::Personal => 'Personal',
             self::Work => 'Work',
         };
     }

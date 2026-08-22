@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Setting extends Model
 {
@@ -16,4 +17,25 @@ class Setting extends Model
         'facebook_url',
         'website_url',
     ];
+
+    protected static function booted(): void
+{
+    static::updating(function (Setting $setting) {
+        if (! $setting->isDirty('profile_image')) {
+            return;
+        }
+
+        $oldImage = $setting->getOriginal('profile_image');
+
+        if ($oldImage) {
+            Storage::disk('private')->delete($oldImage);
+        }
+    });
+
+    static::deleted(function (Setting $setting) {
+        if ($setting->profile_image) {
+            Storage::disk('private')->delete($setting->profile_image);
+        }
+    });
+}
 }

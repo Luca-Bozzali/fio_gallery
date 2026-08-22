@@ -23,10 +23,7 @@ class AlbumForm
                     ->afterStateUpdated(fn ($state, $set) => $set('slug', Str::slug($state)))
                     ->maxLength(255),
 
-                TextInput::make('slug')
-                    ->disabled()
-                    ->dehydrated()
-                    ->required(),
+            
 
                 Select::make('year')
                     ->label('Anno')
@@ -42,19 +39,15 @@ class AlbumForm
                 Select::make('type')
                     ->label('Tipo')
                     ->options(AlbumType::options())
-                    ->default(AlbumType::Portfolio->value)
+                    ->default(AlbumType::Personal->value)
                     ->required(),
 
                 Textarea::make('description')
-                    ->label('Descrizione')
-                    ->rows(5),
-
-                Toggle::make('featured')
-                    ->label('Mostra in homepage')
-                    ->default(false),
+    ->label('Descrizione')
+    ->rows(1),
 
                 Toggle::make('is_published')
-                    ->label('Pubblicato')
+                    ->label('Pubblica album')
                     ->default(true),
             ]);
     }

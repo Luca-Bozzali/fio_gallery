@@ -22,8 +22,6 @@ class AlbumResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'title';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Portfolio';
-
     protected static ?string $navigationLabel = 'Albums';
 
     protected static ?int $navigationSort = 1;

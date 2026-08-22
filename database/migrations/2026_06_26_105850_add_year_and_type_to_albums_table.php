@@ -15,7 +15,7 @@ return new class extends Migration
             $table->year('year')->after('title');
 
             $table->string('type')
-                ->default('portfolio')
+                ->default('personal')
                 ->after('year');
         });
     }

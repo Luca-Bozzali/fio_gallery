@@ -4,8 +4,6 @@ namespace App\Filament\Resources\Photos\Schemas;
 
 use Closure;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
 
@@ -24,18 +22,14 @@ class PhotoForm
                     ->visibility('public')
                     ->required()
                     ->columnSpanFull(),
-                TextInput::make('title')
-                    ->label('Titolo'),
-
-                Textarea::make('description')
-                    ->label('Descrizione'),
-
-                TextInput::make('alt_text')
-                    ->label('Testo alternativo'),
 
                 Toggle::make('is_published')
                     ->label('Pubblicata')
                     ->default(true),
+
+                Toggle::make('is_homepage')
+                    ->label('In homepage')
+                    ->default(false),
             ]);
     }
 }

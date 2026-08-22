@@ -22,12 +22,13 @@ class SettingResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'photographer_name';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Website';
+    protected static ?string $navigationLabel = 'Informazioni personali';
 
-    protected static ?string $navigationLabel = 'Settings';
+    protected static ?string $modelLabel = 'Informazione personale';
 
-    protected static ?int $navigationSort = 1;
+    protected static ?string $pluralModelLabel = 'Informazioni personali';
 
+    protected static ?int $navigationSort = 3;
 
     public static function form(Schema $schema): Schema
     {
