@@ -323,6 +323,11 @@ LIGHTBOX
     font-size: 1.1rem;
 }
 
+.work-empty {
+    margin: 0;
+    color: var(--color-muted);
+}
+
 .year-section {
     margin-bottom: 110px;
 }
@@ -470,6 +475,16 @@ LIGHTBOX
     transition: transform .35s ease, opacity .35s ease;
 }
 
+.personal-album-image--empty {
+    display: grid;
+    place-items: center;
+    color: var(--color-muted);
+    font-size: .75rem;
+    letter-spacing: .08em;
+    text-align: center;
+    text-transform: uppercase;
+}
+
 .personal-album-info {
     padding-top: 16px;
 }
@@ -500,6 +515,12 @@ LIGHTBOX
 .personal-album-link:focus-visible {
     outline: 1px solid var(--color-text);
     outline-offset: 6px;
+}
+
+.personal-empty {
+    margin: 0;
+    color: var(--color-muted);
+    text-align: center;
 }
 
 /* ABOUT */
@@ -867,15 +888,13 @@ CONTACT
 }
 
 .site-footer a {
-    color: var(--color-text);
+    color: var(--color-muted);
     font-size: 0.86rem;
     font-weight: 600;
+    text-decoration: none;
 }
 
-.site-footer a:hover {
-    text-decoration: underline;
-    text-underline-offset: 0.25rem;
-}
+
 
 
 /* MEDIA QUERIES */

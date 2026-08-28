@@ -1,41 +1,39 @@
 <x-layout title="Work">
+    @php
+        $albumsByYear = \Illuminate\Support\Facades\Schema::hasTable('albums')
+            ? \App\Models\Album::query()
+                ->with([
+                    'coverPhoto' => fn ($query) => $query->where('is_published', true),
+                ])
+                ->where('type', \App\Enums\AlbumType::Work->value)
+                ->where('is_published', true)
+                ->orderByDesc('year')
+                ->orderBy('sort_order')
+                ->orderBy('title')
+                ->get()
+                ->groupBy('year')
+            : collect();
+
+        $placeholderCover = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2 3'%3E%3Crect width='2' height='3' fill='%23e7e1d8'/%3E%3C/svg%3E";
+    @endphp
 
     <div class="content-wrapper">
-
         <div class="work-header">
-
             <h1>WORK</h1>
-
-            <p class="work-subtitle">
-                Selected works through the years
-            </p>
-
+            <p class="work-subtitle">Selected works through the years</p>
         </div>
 
-        <x-year-gallery year="2026">
-
-            <img src="{{ asset('images/prova_1.jpg') }}" alt="">
-            <img src="{{ asset('images/prova_2.jpg') }}" alt="">
-            <img src="{{ asset('images/prova_3.jpg') }}" alt="">
-            <img src="{{ asset('images/prova_4.jpg') }}" alt="">
-            <img src="{{ asset('images/prova_5.jpg') }}" alt="">
-            <img src="{{ asset('images/prova_2.jpg') }}" alt="">
-           
-
-        </x-year-gallery>
-
-        <x-year-gallery year="2025">
-
-            <img src="{{ asset('images/prova_1.jpg') }}" alt="">
-            <img src="{{ asset('images/prova_2.jpg') }}" alt="">
-            <img src="{{ asset('images/prova_3.jpg') }}" alt="">
-            <img src="{{ asset('images/prova_4.jpg') }}" alt="">
-            <img src="{{ asset('images/prova_5.jpg') }}" alt="">
-              <img src="{{ asset('images/prova_2.jpg') }}" alt="">
-            
-
-        </x-year-gallery>
-
+        @forelse ($albumsByYear as $year => $albums)
+            <x-year-gallery :year="$year">
+                @foreach ($albums as $album)
+                    <img
+                        src="{{ $album->coverPhoto?->image_url ?: $placeholderCover }}"
+                        alt="{{ $album->coverPhoto?->alt_text ?: $album->title . ' - work photography project' }}"
+                    >
+                @endforeach
+            </x-year-gallery>
+        @empty
+            <p class="work-empty">No work projects are currently available.</p>
+        @endforelse
     </div>
-
 </x-layout>
