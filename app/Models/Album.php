@@ -107,6 +107,11 @@ class Album extends Model
         return $this->belongsTo(Photo::class, 'cover_photo_id');
     }
 
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
     protected function casts(): array
     {
         return [

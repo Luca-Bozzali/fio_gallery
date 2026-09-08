@@ -126,7 +126,6 @@ class AlbumsTable
     {
         $field = FileUpload::make('photos')
             ->label('Foto')
-            ->image()
             ->acceptedFileTypes(AlbumPhotoUploadService::IMAGE_MIME_TYPES)
             ->maxSize(AlbumPhotoUploadService::MAX_IMAGE_SIZE)
             ->maxFiles(AlbumPhotoUploadService::MAX_BULK_FILES)
@@ -139,7 +138,6 @@ class AlbumsTable
             ->directory(fn (): string => 'albums/'.($action->getSelectedRecords()->first()?->slug ?? 'album'))
             ->visibility('public')
             ->storeFileNamesIn('photo_file_names')
-            ->required()
             ->columnSpanFull();
 
         if ($directoryUpload) {

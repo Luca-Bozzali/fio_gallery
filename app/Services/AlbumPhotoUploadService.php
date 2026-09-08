@@ -17,7 +17,7 @@ class AlbumPhotoUploadService
         'image/gif',
     ];
 
-    public const MAX_IMAGE_SIZE = 12288;
+    public const MAX_IMAGE_SIZE = 51200;
 
     public const MAX_BULK_FILES = 300;
 

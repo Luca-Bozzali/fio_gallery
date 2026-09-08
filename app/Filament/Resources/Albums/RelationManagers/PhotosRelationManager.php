@@ -30,7 +30,7 @@ class PhotosRelationManager extends RelationManager
         'image/gif',
     ];
 
-    private const MAX_IMAGE_SIZE = 12288;
+    private const MAX_IMAGE_SIZE = 51200;
 
     private const MAX_BULK_FILES = 300;
 
@@ -160,7 +160,6 @@ class PhotosRelationManager extends RelationManager
     {
         $field = FileUpload::make('photos')
             ->label('Foto')
-            ->image()
             ->acceptedFileTypes(self::IMAGE_MIME_TYPES)
             ->maxSize(self::MAX_IMAGE_SIZE)
             ->maxFiles(self::MAX_BULK_FILES)
@@ -173,7 +172,6 @@ class PhotosRelationManager extends RelationManager
             ->directory(fn (): string => 'albums/'.$this->getOwnerRecord()->slug)
             ->visibility('public')
             ->storeFileNamesIn('photo_file_names')
-            ->required()
             ->columnSpanFull();
 
         if ($directoryUpload) {
