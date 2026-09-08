@@ -18,14 +18,13 @@
         <div class="content-wrapper">
             <header class="personal-header">
                 <h1>PERSONAL</h1>
-                <p>My personal projects</p>
             </header>
 
             @if ($albums->isNotEmpty())
                 <div id="personal-projects" class="personal-grid">
                     @foreach ($albums as $album)
                         <article id="{{ $album->slug }}" class="personal-album">
-                            <a href="#{{ $album->slug }}" class="personal-album-link">
+                            <a href="{{ route('personal.album', $album) }}" class="personal-album-link">
                                 @if ($album->coverPhoto?->image_url)
                                     <div class="personal-album-image">
                                         <img

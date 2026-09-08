@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\AlbumType;
+use App\Models\Album;
 use App\Models\Photo;
 use Illuminate\Support\Facades\Schema;
 
@@ -39,6 +41,16 @@ class PublicController extends Controller
         return view('personal');
     }
 
+    public function workAlbum(Album $album)
+    {
+        return $this->album($album, AlbumType::Work, 'album-work');
+    }
+
+    public function personalAlbum(Album $album)
+    {
+        return $this->album($album, AlbumType::Personal, 'album-personal');
+    }
+
     public function about()
     {
         return view('about');
@@ -47,5 +59,19 @@ class PublicController extends Controller
     public function contact()
     {
         return view('contact');
+    }
+
+    private function album(Album $album, AlbumType $type, string $view)
+    {
+        abort_unless($album->is_published && $album->type === $type, 404);
+
+        $album->load([
+            'photos' => fn ($query) => $query
+                ->where('is_published', true)
+                ->orderBy('sort_order')
+                ->orderBy('id'),
+        ]);
+
+        return view($view, compact('album'));
     }
 }

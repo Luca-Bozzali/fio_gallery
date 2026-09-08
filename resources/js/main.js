@@ -78,6 +78,7 @@ const galleryImages = document.querySelectorAll(".lightbox-trigger");
 
 const lightbox = document.getElementById("lightbox");
 
+if (lightbox) {
 const lightboxImg = lightbox.querySelector(".lightbox-image");
 
 const closeBtn = lightbox.querySelector(".lightbox-close");
@@ -165,4 +166,4 @@ document.addEventListener("keydown",(e)=>{
     if(e.key==="ArrowLeft") prevImage();
 
 });
-
+}

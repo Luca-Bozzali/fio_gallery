@@ -20,16 +20,21 @@
     <div class="content-wrapper">
         <div class="work-header">
             <h1>WORK</h1>
-            <p class="work-subtitle">Selected works through the years</p>
         </div>
 
         @forelse ($albumsByYear as $year => $albums)
             <x-year-gallery :year="$year">
                 @foreach ($albums as $album)
-                    <img
-                        src="{{ $album->coverPhoto?->image_url ?: $placeholderCover }}"
-                        alt="{{ $album->coverPhoto?->alt_text ?: $album->title . ' - work photography project' }}"
+                    <a
+                        href="{{ route('work.album', $album) }}"
+                        class="work-album-link"
+                        aria-label="Apri l'album {{ $album->title }}"
                     >
+                        <img
+                            src="{{ $album->coverPhoto?->image_url ?: $placeholderCover }}"
+                            alt="{{ $album->coverPhoto?->alt_text ?: $album->title . ' - work photography project' }}"
+                        >
+                    </a>
                 @endforeach
             </x-year-gallery>
         @empty
