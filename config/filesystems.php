@@ -41,7 +41,11 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => rtrim(env('APP_URL', 'http://localhost'), '/').'/storage',
+            // Use a same-origin URL by default. This keeps uploaded photos
+            // reachable when the application is served from a host or port
+            // different from APP_URL (for example a local development URL).
+            // Set FILESYSTEM_PUBLIC_URL when files are served by a CDN.
+            'url' => env('FILESYSTEM_PUBLIC_URL', '/storage'),
             'visibility' => 'public',
             'throw' => false,
             'report' => false,
