@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Albums\RelationManagers;
 use App\Filament\Resources\Albums\Pages\EditAlbum;
 use App\Models\Photo;
 use App\Services\HomepagePhotoService;
+use App\Services\WebpConverter;
 use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -226,6 +227,13 @@ class PhotosRelationManager extends RelationManager
         $skippedInvalid = 0;
 
         foreach ($uploads as $upload) {
+            if (str_starts_with(basename($upload['path']), '._')) {
+                Storage::disk('public')->delete($upload['path']);
+                $skippedInvalid++;
+
+                continue;
+            }
+
             $filenameKey = strtolower($upload['filename']);
 
             if (isset($existingLookup[$filenameKey]) || isset($seenInUpload[$filenameKey])) {
@@ -242,6 +250,15 @@ class PhotosRelationManager extends RelationManager
                 $skippedInvalid++;
 
                 continue;
+            }
+
+            $converted = app(WebpConverter::class)->convert($upload['path']);
+
+            if ($converted !== null) {
+                $upload['path'] = $converted['path'];
+                $upload['filename'] = pathinfo($converted['path'], PATHINFO_BASENAME);
+                $metadata['mime_type'] = $converted['mime_type'];
+                $metadata['filesize'] = $converted['filesize'];
             }
 
             Photo::query()->create([

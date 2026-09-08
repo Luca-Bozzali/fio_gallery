@@ -58,6 +58,13 @@ class AlbumPhotoUploadService
         $skippedInvalid = 0;
 
         foreach ($uploads as $upload) {
+            if (str_starts_with(basename($upload['path']), '._')) {
+                Storage::disk('public')->delete($upload['path']);
+                $skippedInvalid++;
+
+                continue;
+            }
+
             $metadata = $this->readImageMetadata($upload['path']);
 
             if ($metadata === null) {
@@ -65,6 +72,15 @@ class AlbumPhotoUploadService
                 $skippedInvalid++;
 
                 continue;
+            }
+
+            $converted = app(WebpConverter::class)->convert($upload['path']);
+
+            if ($converted !== null) {
+                $upload['path'] = $converted['path'];
+                $upload['filename'] = pathinfo($converted['path'], PATHINFO_BASENAME);
+                $metadata['mime_type'] = $converted['mime_type'];
+                $metadata['filesize'] = $converted['filesize'];
             }
 
             $validated[] = [...$upload, 'metadata' => $metadata];
