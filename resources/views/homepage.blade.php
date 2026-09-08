@@ -12,37 +12,13 @@
                             class="lightbox-trigger"
                             src="{{ $photo->image_url }}"
                             alt="{{ $photo->filename }}"
+                            role="button"
+                            tabindex="0"
                         >
                     </div>
                 @endforeach
             </div>
         @endforeach
     </div>
-    <div class="lightbox" id="lightbox">
-
-    <button class="lightbox-close">
-
-        &times;
-
-    </button>
-
-    <button class="lightbox-prev">
-
-        &#10094;
-
-    </button>
-
-    <img
-        class="lightbox-image"
-        src=""
-        alt=""
-    >
-
-    <button class="lightbox-next">
-
-        &#10095;
-
-    </button>
-
-</div>
+    <x-lightbox />
 </x-layout>

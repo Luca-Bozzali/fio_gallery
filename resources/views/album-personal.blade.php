@@ -17,7 +17,13 @@
                 @endif
 
                 <figure>
-                    <img src="{{ $photo->image_url }}" alt="{{ $photo->alt_text ?: $photo->title ?: $album->title }}">
+                    <img
+                        class="lightbox-trigger"
+                        src="{{ $photo->image_url }}"
+                        alt="{{ $photo->alt_text ?: $photo->title ?: $album->title }}"
+                        role="button"
+                        tabindex="0"
+                    >
                 </figure>
 
                 @if ($loop->last)
@@ -28,4 +34,5 @@
             @endforelse
         </div>
     </section>
+    <x-lightbox />
 </x-layout>

@@ -185,6 +185,10 @@ body {
 LIGHTBOX
 ==================================*/
 
+.lightbox-trigger {
+    cursor: pointer;
+}
+
 .lightbox{
 
     position:fixed;
