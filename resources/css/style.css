@@ -39,9 +39,18 @@ body {
 }
 
 .navbar-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
     font-family: var(--font-serif);
     font-size: 1.25rem;
     color: var(--color-text);
+}
+
+.navbar-brand-logo {
+    width: 2rem;
+    height: 2rem;
+    object-fit: contain;
 }
 
 .navbar-toggler {
@@ -316,8 +325,17 @@ LIGHTBOX
 /* WORK */
 
 .work-header {
-    text-align: left;
+    text-align: center;
     margin-bottom: 100px;
+}
+
+.work-header h1 {
+    margin: 0;
+    color: var(--color-text);
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 300;
+    letter-spacing: 0.1em;
 }
 
 .work-subtitle {
@@ -341,7 +359,7 @@ LIGHTBOX
 }
 
 .year-title {
-    text-align: left;
+    text-align: center;
     margin-bottom: 40px;
     font-family: var(--font-serif);
     font-weight: 300;
@@ -406,7 +424,7 @@ LIGHTBOX
 }
 
 .gallery-track .work-album-link {
-    width: calc((100% - 40px) / 3);
+    width: calc((100% - 60px) / 4);
     flex-shrink: 0;
     color: inherit;
     outline-offset: 6px;
@@ -414,7 +432,6 @@ LIGHTBOX
 
 .gallery-track img {
     width: 100%;
-    /* era (100% - 60px) / 4 */
     aspect-ratio: 2 / 3;
     object-fit: cover;
     display: block;
@@ -645,12 +662,11 @@ ABOUT
 
 }
 
+.about-grid--without-image {
+    grid-template-columns: 1fr;
+}
+
 .about-image{
-
-    position:sticky;
-
-    top:120px;
-
 }
 
 .about-image img{
@@ -682,6 +698,8 @@ ABOUT
 }
 
 .about-content h1{
+
+    font-family: var(--font-serif);
 
     font-size:4rem;
 
@@ -727,6 +745,11 @@ ABOUT
 
 }
 
+.about-empty {
+    margin: 0;
+    color: var(--color-muted);
+}
+
 blockquote{
 
     margin-top:100px;
@@ -747,7 +770,7 @@ CONTACT
 
 .contact-page{
 
-    padding:120px 0;
+    padding:20px 0;
 
 }
 
@@ -760,6 +783,8 @@ CONTACT
 }
 
 .contact-header h1{
+
+    font-family: var(--font-serif);
 
     font-size:4rem;
 
@@ -863,6 +888,8 @@ CONTACT
 
     text-align:center;
 
+    font-family: var(--font-serif);
+
     font-weight:300;
 
     margin-bottom:50px;
@@ -954,6 +981,19 @@ CONTACT
     line-height:1.3;
 
 }
+
+/* Titoli principali delle pagine */
+.work-header h1,
+.personal-header h1,
+.about-content h1,
+.contact-header h1 {
+    color: var(--color-text);
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 300;
+    letter-spacing: 0.1em;
+}
+
 /* FOOTER */
 
 
@@ -1042,6 +1082,10 @@ CONTACT
     }
 
     .personal-page {
+        padding: 0;
+    }
+
+    .contact-page {
         padding: 0;
     }
 

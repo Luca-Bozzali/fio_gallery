@@ -8,10 +8,6 @@
 
             <h1>CONTACT</h1>
 
-            <p>
-                Let's create something together.
-            </p>
-
         </div>
 
         <div class="contact-card">
@@ -85,17 +81,6 @@
                 </button>
 
             </form>
-
-        </div>
-
-        <div class="contact-quote">
-
-            <p>
-
-                Every project starts<br>
-                with a conversation.
-
-            </p>
 
         </div>
 

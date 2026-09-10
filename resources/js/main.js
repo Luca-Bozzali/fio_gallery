@@ -7,7 +7,7 @@ document.querySelectorAll(".year-section").forEach(section => {
     const dotsWrap = section.querySelector("[data-dots]");
 
     const images = track.querySelectorAll("img");
-    const visibleImages = 3;
+    const visibleImages = 4;
     let currentIndex = 0;
 
     updateButtons();

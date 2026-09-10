@@ -1,6 +1,9 @@
 <nav class="navbar navbar-expand-lg site-navbar">
   <div class="container">
-    <a class="navbar-brand" href="{{ route('homepage') }}">Fiorini Tommaso</a>
+    <a class="navbar-brand" href="{{ route('homepage') }}" aria-label="Fiorini Tommaso - Homepage">
+      <img class="navbar-brand-logo" src="{{ asset('images/tommaso-fiorini-logo-transparent.png') }}" alt="" aria-hidden="true">
+      <span>Fiorini Tommaso</span>
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>

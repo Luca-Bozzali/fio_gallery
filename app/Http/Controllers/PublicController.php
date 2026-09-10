@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Enums\AlbumType;
 use App\Models\Album;
 use App\Models\Photo;
+use App\Models\Setting;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Storage;
 
 class PublicController extends Controller
 {
@@ -53,7 +55,24 @@ class PublicController extends Controller
 
     public function about()
     {
-        return view('about');
+        $setting = Schema::hasTable('settings')
+            ? Setting::query()->first()
+            : null;
+        $hasProfileImage = $setting?->profile_image
+            && Storage::disk('private')->exists($setting->profile_image);
+
+        return view('about', compact('setting', 'hasProfileImage'));
+    }
+
+    public function aboutProfileImage()
+    {
+        abort_unless(Schema::hasTable('settings'), 404);
+
+        $setting = Setting::query()->first();
+
+        abort_unless($setting?->profile_image && Storage::disk('private')->exists($setting->profile_image), 404);
+
+        return Storage::disk('private')->response($setting->profile_image);
     }
 
     public function contact()
