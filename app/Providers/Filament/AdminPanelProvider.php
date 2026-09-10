@@ -2,7 +2,6 @@
 
 namespace App\Providers\Filament;
 
-use App\Filament\Resources\Albums\Pages\ListAlbums;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -10,13 +9,11 @@ use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
-use Filament\View\PanelsRenderHook;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class AdminPanelProvider extends PanelProvider
@@ -65,44 +62,6 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ])
-            ->renderHook(
-                PanelsRenderHook::SCRIPTS_AFTER,
-                fn (): string => Blade::render(<<<'BLADE'
-<script>
-document.addEventListener('change', (event) => {
-    const input = event.target;
-
-    if (!(input instanceof HTMLInputElement) || input.type !== 'file') return;
-    if (!input.hasAttribute('webkitdirectory') && !input.hasAttribute('directory')) return;
-
-    const file = input.files && input.files[0];
-
-    if (!file) return;
-
-    const relativePath = file.webkitRelativePath || (file.getRelativePath ? file.getRelativePath() : '');
-
-    if (!relativePath) return;
-
-    const folder = String(relativePath).split(/[\\/]/).filter(Boolean)[0];
-
-    if (!folder) return;
-
-    const dialog = input.closest('[role="dialog"]') || input.closest('.fi-modal');
-
-    if (!dialog) return;
-
-    const titleInput = dialog.querySelector('input[wire\\:model*="title"]');
-
-    if (!titleInput || titleInput.value.trim() !== '') return;
-
-    titleInput.value = folder.replace(/[-_]+/g, ' ').replace(/\s+/g, ' ').trim().replace(/\b\w/g, (char) => char.toUpperCase());
-    titleInput.dispatchEvent(new Event('input', { bubbles: true }));
-    titleInput.dispatchEvent(new Event('change', { bubbles: true }));
-});
-</script>
-BLADE),
-                scopes: ListAlbums::class,
-            );
+            ]);
     }
 }

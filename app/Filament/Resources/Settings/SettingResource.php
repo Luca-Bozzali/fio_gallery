@@ -13,6 +13,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 class SettingResource extends Resource
 {
@@ -45,6 +46,21 @@ class SettingResource extends Resource
         return [
             //
         ];
+    }
+
+    public static function canCreate(): bool
+    {
+        return ! static::getModel()::query()->exists();
+    }
+
+    public static function canDelete(Model $record): bool
+    {
+        return false;
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return false;
     }
 
     public static function getPages(): array

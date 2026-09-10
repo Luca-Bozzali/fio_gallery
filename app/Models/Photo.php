@@ -8,7 +8,7 @@ use Illuminate\Validation\ValidationException;
 
 class Photo extends Model
 {
-    public const HOMEPAGE_LIMIT = 32;
+    public const HOMEPAGE_LIMIT = 18;
 
     protected $appends = ['image_url'];
 

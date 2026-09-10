@@ -87,6 +87,11 @@ class PhotosRelationManager extends RelationManager
                         ? Photo::homepageLimitMessage()
                         : null)
                     ->updateStateUsing(fn (Photo $record, bool $state): bool => $this->updateHomepageState($record, $state)),
+
+                ToggleColumn::make('is_cover')
+                    ->label('Copertina')
+                    ->state(fn (Photo $record): bool => $this->isCover($record))
+                    ->updateStateUsing(fn (Photo $record, bool $state): bool => $this->updateCoverState($record, $state)),
             ])
             ->defaultSort('sort_order')
             ->reorderable('sort_order')
@@ -95,21 +100,6 @@ class PhotosRelationManager extends RelationManager
                 $this->folderUploadAction(),
             ])
             ->recordActions([
-                Action::make('setCover')
-                    ->label(fn (Photo $record): string => $this->isCover($record)
-                        ? 'Rimuovi copertina'
-                        : 'Imposta come copertina')
-                    ->icon(fn (Photo $record): Heroicon => $this->isCover($record)
-                        ? Heroicon::Star
-                        : Heroicon::OutlinedStar)
-                    ->color(fn (Photo $record): string => $this->isCover($record)
-                        ? 'primary'
-                        : 'gray')
-                    ->iconButton()
-                    ->action(function (Photo $record): void {
-                        $this->toggleCover($record);
-                    }),
-
                 DeleteAction::make()
                     ->label('Elimina foto')
                     ->icon(Heroicon::OutlinedXMark)
@@ -372,18 +362,14 @@ class PhotosRelationManager extends RelationManager
         return $this->getOwnerRecord()->cover_photo_id === $photo->getKey();
     }
 
-    private function toggleCover(Photo $photo): void
+    private function updateCoverState(Photo $photo, bool $state): bool
     {
         $album = $this->getOwnerRecord();
-        $isCover = $this->isCover($photo);
 
         $album->forceFill([
-            'cover_photo_id' => $isCover ? null : $photo->getKey(),
+            'cover_photo_id' => $state ? $photo->getKey() : null,
         ])->save();
 
-        Notification::make()
-            ->title($isCover ? 'Copertina rimossa' : 'Foto impostata come copertina')
-            ->success()
-            ->send();
+        return $state;
     }
 }

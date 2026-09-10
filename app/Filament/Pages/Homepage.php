@@ -74,11 +74,6 @@ class Homepage extends Page implements HasTable
                     ->icon(Heroicon::OutlinedXMark)
                     ->iconButton()
                     ->color('danger')
-                    ->requiresConfirmation()
-                    ->modalHeading('Rimuovere dalla Homepage?')
-                    ->modalDescription(
-                        'La foto rimarrà nell\'album, ma non verrà più mostrata nella Homepage.'
-                    )
                     ->action(function (Photo $record): void {
                         app(HomepagePhotoService::class)->remove($record);
 
