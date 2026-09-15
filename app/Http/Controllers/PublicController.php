@@ -3,9 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Enums\AlbumType;
+use App\Http\Requests\ContactRequest;
+use App\Mail\ContactMessageMail;
 use App\Models\Album;
+use App\Models\Contact;
 use App\Models\Photo;
 use App\Models\Setting;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 
@@ -82,6 +88,38 @@ class PublicController extends Controller
             : null;
 
         return view('contact', compact('setting'));
+    }
+
+    public function contactSubmit(ContactRequest $request): RedirectResponse
+    {
+        $data = $request->validated();
+
+        if (! empty($data['website'])) {
+            return back()->with('status', 'success-message');
+        }
+
+        Contact::query()->create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'message' => $data['message'],
+        ]);
+
+        $recipient = config('services.contact.recipient');
+
+        if (blank($recipient)) {
+            Log::warning('MAIL_CONTACT_RECIPIENT non configurato: messaggio salvato ma non inoltrato via email.');
+
+            return back()->with('status', 'success-message');
+        }
+
+        Mail::to($recipient)
+            ->send(new ContactMessageMail(
+                name: $data['name'],
+                email: $data['email'],
+                messageBody: $data['message'],
+            ));
+
+        return back()->with('status', 'success-message');
     }
 
     private function album(Album $album, AlbumType $type, string $view)

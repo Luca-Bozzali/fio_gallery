@@ -79,3 +79,20 @@ function prepareHomeCollage(collage) {
 }
 
 document.querySelectorAll('[data-home-collage]').forEach(prepareHomeCollage);
+
+function initToast() {
+    const toast = document.querySelector('[data-toast]');
+
+    if (!toast) {
+        return;
+    }
+
+    requestAnimationFrame(() => toast.classList.add('is-visible'));
+
+    window.setTimeout(() => {
+        toast.classList.remove('is-visible');
+        window.setTimeout(() => toast.remove(), 400);
+    }, 4000);
+}
+
+initToast();

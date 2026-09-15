@@ -76,23 +76,58 @@
 
             <h2>Send a message</h2>
 
-            <form>
+            @if (session('status') === 'success-message')
+                <div class="toast-message" data-toast role="status" aria-live="polite">
+                    <span class="toast-message__dot"></span>
+                    Email inviata
+                </div>
+            @endif
+
+            @if ($errors->any())
+                <div class="contact-form-status contact-form-status--error" role="alert">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form method="POST" action="{{ route('contact.submit') }}">
+
+                @csrf
 
                 <input
                     type="text"
+                    name="name"
                     placeholder="Your name"
+                    value="{{ old('name') }}"
+                    required
                 >
 
                 <input
                     type="email"
+                    name="email"
                     placeholder="Email address"
+                    value="{{ old('email') }}"
+                    required
                 >
 
-
                 <textarea
+                    name="message"
                     rows="7"
                     placeholder="Tell me about your project..."
-                ></textarea>
+                    required
+                >{{ old('message') }}</textarea>
+
+                <input
+                    type="text"
+                    name="website"
+                    class="contact-form-honeypot"
+                    tabindex="-1"
+                    autocomplete="off"
+                    aria-hidden="true"
+                >
 
                 <button type="submit">
 
