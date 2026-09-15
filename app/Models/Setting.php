@@ -14,6 +14,7 @@ class Setting extends Model
         'profile_image',
         'instagram_url',
         'vimeo_url',
+        'location',
     ];
 
     protected static function booted(): void

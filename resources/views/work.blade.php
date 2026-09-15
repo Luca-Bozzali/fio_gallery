@@ -30,10 +30,13 @@
                         class="work-album-link"
                         aria-label="Apri l'album {{ $album->title }}"
                     >
-                        <img
-                            src="{{ $album->coverPhoto?->image_url ?: $placeholderCover }}"
-                            alt="{{ $album->coverPhoto?->alt_text ?: $album->title . ' - work photography project' }}"
-                        >
+                        <div class="work-album-image">
+                            <img
+                                src="{{ $album->coverPhoto?->image_url ?: $placeholderCover }}"
+                                alt="{{ $album->coverPhoto?->alt_text ?: $album->title . ' - work photography project' }}"
+                            >
+                        </div>
+                        <span class="work-album-title">{{ $album->title }}</span>
                     </a>
                 @endforeach
             </x-year-gallery>

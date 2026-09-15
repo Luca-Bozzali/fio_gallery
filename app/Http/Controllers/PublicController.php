@@ -77,7 +77,11 @@ class PublicController extends Controller
 
     public function contact()
     {
-        return view('contact');
+        $setting = Schema::hasTable('settings')
+            ? Setting::query()->first()
+            : null;
+
+        return view('contact', compact('setting'));
     }
 
     private function album(Album $album, AlbumType $type, string $view)

@@ -22,6 +22,17 @@ class SettingForm
                     ->email()
                     ->required(),
 
+                TextInput::make('instagram_url')
+                    ->url(),
+
+                TextInput::make('vimeo_url')
+                    ->url()
+                    ->placeholder('https://vimeo.com/...'),
+
+                TextInput::make('location')
+                    ->label('Posizione')
+                    ->columnSpanFull(),
+
                 Textarea::make('bio')
                     ->rows(10)
                     ->columnSpanFull(),
@@ -30,13 +41,6 @@ class SettingForm
                     ->label('Immagine profilo')
                     ->image()
                     ->columnSpanFull(),
-
-                TextInput::make('instagram_url')
-                    ->url(),
-
-                TextInput::make('vimeo_url')
-                    ->url()
-                    ->placeholder('https://vimeo.com/...'),
             ]);
     }
 }

@@ -326,7 +326,7 @@ LIGHTBOX
 
 .work-header {
     text-align: center;
-    margin-bottom: 100px;
+    margin-bottom: 30px;
 }
 
 .work-header h1 {
@@ -351,7 +351,7 @@ LIGHTBOX
 }
 
 .year-section {
-    margin-bottom: 110px;
+    margin-bottom: 40px;
 }
 
 .year-section:last-child {
@@ -369,12 +369,14 @@ LIGHTBOX
 }
 
 .gallery-container {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+    position: relative;
 }
 
 .gallery-arrow{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
     width:52px;
     height:52px;
     flex-shrink:0;
@@ -397,12 +399,20 @@ LIGHTBOX
     opacity .25s ease;
 }
 
+.gallery-arrow[data-prev] {
+    left: -75px;
+}
+
+.gallery-arrow[data-next] {
+    right: -75px;
+}
+
 .gallery-arrow:hover:not(:disabled) {
     background: var(--color-text);
     border-color: var(--color-text);
     color: var(--color-surface);
     box-shadow: 0 6px 20px rgba(25,24,23,.18);
-    transform: scale(1.06);
+    transform: translateY(-50%) scale(1.06);
 }
 
 .gallery-arrow:disabled {
@@ -419,31 +429,48 @@ LIGHTBOX
 
 .gallery-track {
     display: flex;
-    gap: 20px;
+    gap: 30px;
     transition: transform .4s ease;
 }
 
 .gallery-track .work-album-link {
-    width: calc((100% - 60px) / 4);
+    width: calc((100% - 90px) / 4);
     flex-shrink: 0;
     color: inherit;
     outline-offset: 6px;
+    text-decoration: none;
 }
 
-.gallery-track img {
-    width: 100%;
+.work-album-image {
+    overflow: hidden;
     aspect-ratio: 2 / 3;
+    background: var(--color-soft);
+}
+
+.work-album-image img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     display: block;
-    transition:
-    transform .35s ease,
-    box-shadow .35s ease;
+    transition: transform .35s ease;
 }
 
-.gallery-track .work-album-link:hover img,
-.gallery-track .work-album-link:focus-visible img {
-    transform: translateY(-6px);
-    box-shadow: 0 18px 40px rgba(0, 0, 0, .18);
+.work-album-link:hover .work-album-image img,
+.work-album-link:focus-visible .work-album-image img {
+    transform: scale(1.03);
+}
+
+.work-album-title {
+    display: block;
+    padding-top: 16px;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    color: var(--color-text);
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* ALBUM */
@@ -525,7 +552,7 @@ LIGHTBOX
 ========================== */
 
 .personal-page {
-    padding: 20px 0;
+    padding: 0;
 }
 
 .personal-header {
@@ -1155,7 +1182,7 @@ CONTACT
         scroll-snap-align: start;
     }
 
-    .gallery-track img {
+    .work-album-image {
         width: 100%;
     }
  .gallery-dots{

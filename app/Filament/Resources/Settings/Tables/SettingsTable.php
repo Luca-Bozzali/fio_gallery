@@ -23,6 +23,9 @@ class SettingsTable
                 TextColumn::make('email')
                     ->label('Email'),
 
+                TextColumn::make('location')
+                    ->label('Posizione'),
+
                 TextColumn::make('updated_at')
                     ->label('Ultima modifica')
                     ->since(),

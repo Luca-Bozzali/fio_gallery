@@ -19,7 +19,7 @@ document.querySelectorAll(".year-section").forEach(section => {
 
     function updateSlider() {
         const imageWidth = images[0].offsetWidth;
-        const gap = 20;
+        const gap = 30;
         const distance = currentIndex * (imageWidth + gap);
         track.style.transform = `translateX(-${distance}px)`;
         updateButtons();

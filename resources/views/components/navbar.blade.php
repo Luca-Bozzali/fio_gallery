@@ -14,11 +14,11 @@
           <span>Homepage</span>
         </a>
 
-        <a class="nav-link {{ request()->routeIs('work') ? 'active' : '' }}" href="{{ route('work') }}">
+        <a class="nav-link {{ request()->routeIs('work', 'work.album') ? 'active' : '' }}" href="{{ route('work') }}">
           <span>Work</span>
         </a>
 
-        <a class="nav-link {{ request()->routeIs('personal') ? 'active' : '' }}" href="{{ route('personal') }}">
+        <a class="nav-link {{ request()->routeIs('personal', 'personal.album') ? 'active' : '' }}" href="{{ route('personal') }}">
           <span>Personal</span>
         </a>
 

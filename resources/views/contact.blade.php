@@ -12,43 +12,63 @@
 
         <div class="contact-card">
 
-            <div class="contact-item">
-
-                <span class="contact-label">EMAIL</span>
-
-                <a href="mailto:fiogallery@gmail.com">
-                   
-                </a>
-
-            </div>
+            @if (filled($setting?->instagram_url))
 
             <div class="contact-item">
 
                 <span class="contact-label">INSTAGRAM</span>
 
-                <a href="https://www.instagram.com/frntms/" target="_blank" rel="noopener noreferrer">
-                    @frntms
+                @php $igHandle = '@' . ltrim(parse_url($setting->instagram_url, PHP_URL_PATH), '/'); @endphp
+                <a href="{{ $setting->instagram_url }}" target="_blank" rel="noopener noreferrer">
+                    {{ $igHandle }}
                 </a>
 
             </div>
+
+            @endif
+
+            @if (filled($setting?->vimeo_url))
 
             <div class="contact-item">
 
-                <span class="contact-label">PHONE</span>
+                <span class="contact-label">VIMEO</span>
 
-                <a href="tel:+393463019079">
-                    +39 346 301 9079
+                @php $vimeoHandle = rtrim(ltrim(parse_url($setting->vimeo_url, PHP_URL_PATH), '/'), '/'); @endphp
+                <a href="{{ $setting->vimeo_url }}" target="_blank" rel="noopener noreferrer">
+                    {{ $vimeoHandle }}
                 </a>
 
             </div>
+
+            @endif
+
+            @if (filled($setting?->email))
+
+            <div class="contact-item">
+
+                <span class="contact-label">EMAIL</span>
+
+                <span>
+                    {{ $setting->email }}
+                </span>
+
+            </div>
+
+            @endif
+
+            @if (filled($setting?->location))
 
             <div class="contact-item">
 
                 <span class="contact-label">LOCATION</span>
 
-                <span>Modena, Italy</span>
+                <span>
+                    {{ $setting->location }}
+                </span>
 
             </div>
+
+            @endif
 
         </div>
 
