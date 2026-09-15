@@ -19,17 +19,13 @@ class SettingSeeder extends Seeder
 
                 'email' => 'info@demophotographer.com',
 
-                'phone' => '+34 600 123 456',
-
                 'bio' => 'Professional photographer specialized in portraits, weddings and landscape photography.',
 
                 'profile_image' => 'photos/demo/profile.webp',
 
                 'instagram_url' => 'https://instagram.com/demo.photographer',
 
-                'facebook_url' => 'https://facebook.com/demo.photographer',
-
-                'website_url' => 'https://demophotographer.com',
+                'vimeo_url' => 'https://vimeo.com/demophotographer',
             ]
         );
     }

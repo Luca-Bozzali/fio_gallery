@@ -14,30 +14,29 @@ class SettingForm
         return $schema
             ->components([
                 TextInput::make('photographer_name')
+                    ->label('Nome fotografo')
                     ->required(),
 
                 TextInput::make('email')
-                    ->label('Email address')
+                    ->label('Indirizzo email')
                     ->email()
                     ->required(),
 
-                TextInput::make('phone')
-                    ->tel(),
-
                 Textarea::make('bio')
+                    ->rows(10)
                     ->columnSpanFull(),
 
                 FileUpload::make('profile_image')
-                    ->image(),
+                    ->label('Immagine profilo')
+                    ->image()
+                    ->columnSpanFull(),
 
                 TextInput::make('instagram_url')
                     ->url(),
 
-                TextInput::make('facebook_url')
-                    ->url(),
-
-                TextInput::make('website_url')
-                    ->url(),
+                TextInput::make('vimeo_url')
+                    ->url()
+                    ->placeholder('https://vimeo.com/...'),
             ]);
     }
 }

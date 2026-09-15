@@ -23,9 +23,6 @@ class SettingsTable
                 TextColumn::make('email')
                     ->label('Email'),
 
-                TextColumn::make('phone')
-                    ->label('Telefono'),
-
                 TextColumn::make('updated_at')
                     ->label('Ultima modifica')
                     ->since(),
