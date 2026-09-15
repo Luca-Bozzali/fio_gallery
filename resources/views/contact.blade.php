@@ -17,7 +17,7 @@
                 <span class="contact-label">EMAIL</span>
 
                 <a href="mailto:fiogallery@gmail.com">
-                    fiogallery@gmail.com
+                   
                 </a>
 
             </div>
